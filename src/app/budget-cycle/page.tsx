@@ -203,6 +203,13 @@ export default function BudgetCyclePage() {
           </p>
         </CardHeader>
         <CardContent>
+          <div className="bg-teal-50 border-l-4 border-teal-500 p-5 rounded-r-lg mb-6 flex items-start gap-4">
+            <div className="text-teal-500 text-xl font-bold mt-1">ℹ️</div>
+            <p className="text-[15px] text-teal-800 leading-relaxed font-medium">
+              <span className="font-bold uppercase tracking-wider block mb-1">So What? THE LEGAL CONSTRAINT</span>
+              This isn&apos;t a technical problem—it&apos;s a legal one. Even if pharmacists forecast demand perfectly, the <span className="font-bold text-red-600 underline">Red Zones</span> represent 2-3 months where it is literally illegal to pay suppliers. Without buying a cache of medicine specifically for this period, stockouts are mathematically guaranteed.
+            </p>
+          </div>
           {/* Legend */}
           <div className="flex flex-wrap gap-4 mb-4">
             <div className="flex items-center gap-2">
@@ -292,7 +299,7 @@ export default function BudgetCyclePage() {
               {sparklineData.slice(0, 4).map((sparkline, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <span className="text-xs text-[#64748B] w-40 truncate">{sparkline.name}</span>
-                  <div className="flex-1 h-8">
+                  <div className="flex-1 h-8 min-h-[32px] min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={sparkline.data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                         <defs>
@@ -322,7 +329,7 @@ export default function BudgetCyclePage() {
           )}
 
           {overlayMode === "expiry" && (
-            <div className="h-[120px]">
+            <div className="h-[120px] min-h-[120px] min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={calendarData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                   <Bar dataKey="expiryWasteRs" fill="#F59E0B" fillOpacity={0.6} radius={[2, 2, 0, 0]} />
@@ -333,7 +340,7 @@ export default function BudgetCyclePage() {
           )}
 
           {overlayMode === "emergency" && (
-            <div className="h-[120px]">
+            <div className="h-[120px] min-h-[120px] min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={calendarData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                   <Bar dataKey="emergencyPremiumRs" fill="#F97316" fillOpacity={0.6} radius={[2, 2, 0, 0]} />
@@ -422,7 +429,7 @@ export default function BudgetCyclePage() {
             </p>
           </CardHeader>
           <CardContent>
-            <div className="h-[320px]">
+            <div className="h-[320px] min-h-[320px] min-w-0">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={ivCannulaChartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <defs>
@@ -436,9 +443,9 @@ export default function BudgetCyclePage() {
                   <YAxis tick={{ fill: "#64748B", fontSize: 11 }} label={{ value: "Stock on Hand", angle: -90, position: "insideLeft", fill: "#64748B", fontSize: 11 }} />
 
                   {/* Blackout annotations */}
-                  <ReferenceLine x="Jul 2021" stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Blackout Starts", position: "top", fill: "#EF4444", fontSize: 9 }} />
-                  <ReferenceLine x="Aug 2021" stroke="#EF4444" strokeDasharray="5 5" strokeOpacity={0.5} label={{ value: "Stock → 0", position: "top", fill: "#EF4444", fontSize: 9 }} />
-                  <ReferenceLine x="Sep 2021" stroke="#22C55E" strokeDasharray="3 3" label={{ value: "Emergency Order", position: "top", fill: "#22C55E", fontSize: 9 }} />
+                  <ReferenceLine x="Jul 2021" stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Blackout", position: "insideTopLeft", fill: "#EF4444", fontSize: 10, fontWeight: "bold" }} />
+                  <ReferenceLine x="Aug 2021" stroke="#EF4444" strokeDasharray="5 5" strokeOpacity={0.5} label={{ value: "Stock → 0", position: "insideTopRight", fill: "#EF4444", fontSize: 9 }} />
+                  <ReferenceLine x="Sep 2021" stroke="#22C55E" strokeDasharray="3 3" label={{ value: "Emergency", position: "top", fill: "#22C55E", fontSize: 9 }} />
                   <ReferenceLine x="Jul 2022" stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Blackout FY23", position: "top", fill: "#EF4444", fontSize: 9 }} />
                   <ReferenceLine x="Jul 2023" stroke="#EF4444" strokeDasharray="3 3" label={{ value: "Blackout FY24", position: "top", fill: "#EF4444", fontSize: 9 }} />
 
@@ -501,7 +508,7 @@ export default function BudgetCyclePage() {
                 <AlertTriangle className="w-4 h-4" />
                 Without Pre-Positioning (Current)
               </h4>
-              <div className="h-[200px] border border-red-200 rounded-lg p-2 bg-red-50/10">
+              <div className="h-[200px] min-h-[200px] min-w-0 border border-red-200 rounded-lg p-2 bg-red-50/10">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={ivCannulaChartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                     <defs>
@@ -528,7 +535,7 @@ export default function BudgetCyclePage() {
                 <Zap className="w-4 h-4" />
                 With 90-Day Pre-Positioning
               </h4>
-              <div className="h-[200px] border border-green-200 rounded-lg p-2 bg-green-50/10">
+              <div className="h-[200px] min-h-[200px] min-w-0 border border-green-200 rounded-lg p-2 bg-green-50/10">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={ivCannulaWithPreposition} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                     <defs>
@@ -550,17 +557,15 @@ export default function BudgetCyclePage() {
             </div>
           </div>
 
-          <div className="text-center mt-6 pt-4 border-t border-[#E2E8F0]">
-            <Link
-              href="/scenario-lab"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-[#0F172A] rounded-xl text-sm font-medium hover:bg-accent-600 shadow-lg shadow-accent/25 transition-all"
-            >
-              Test All Interventions in the Scenario Lab
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </CardContent>
       </Card>
+
+      <div className="mt-16 mb-8 flex justify-center">
+        <Link href="/scenario-lab" className="inline-flex items-center gap-3 px-12 py-6 bg-teal-600 text-white rounded-2xl text-xl font-bold hover:bg-teal-700 shadow-xl hover:shadow-teal-600/40 transition-all hover:scale-[1.05] active:scale-[0.95]">
+          Next Step: Test Interventions in the Scenario Lab 
+          <ArrowRight className="w-8 h-8" />
+        </Link>
+      </div>
     </div>
   );
 }

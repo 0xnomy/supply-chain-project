@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import {
   AlertTriangle, TrendingDown, Calculator, ShieldAlert, Scale,
-  ArrowRight, Skull, Package, Banknote, Clock,
+  ArrowRight, Skull, Package, Banknote, Clock, Users,
 } from "lucide-react";
 import { getSimulationData } from "@/lib/simulation/dataEngine";
 import { formatRs, formatPercent } from "@/lib/utils";
@@ -143,42 +143,72 @@ export default function CrisisPage() {
   return (
     <div className="grid-pattern">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        {/* ─── NEW SECTION A: Academic Attribution Banner ─── */}
-        <div className="mb-12">
-          <div className="bg-teal-50 border border-teal-200 rounded-xl p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="flex-1">
-              <span className="inline-block bg-teal-100 text-teal-700 font-semibold text-sm px-3 py-1 rounded-full mb-4">
-                MS-491 · Supply Chain Management
-              </span>
-              <h1 className="text-2xl font-semibold text-slate-900 mb-2">
-                Hospital Supply Chain Failure Analysis & Simulation
+
+        {/* ─── NEW SECTION A: Academic Attribution Banner (Premium Redesign) ─── */}
+        <div className="mb-14 overflow-hidden rounded-3xl border border-teal-200 bg-white shadow-2xl shadow-teal-900/5">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            {/* Left: Project & Course Info */}
+            <div className="lg:col-span-8 p-8 md:p-12 bg-gradient-to-br from-teal-50/50 to-white">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="bg-teal-600 text-white font-bold text-xs px-3 py-1.5 rounded-full tracking-wider uppercase">
+                  MS-491
+                </span>
+                <span className="text-teal-700 font-semibold text-sm tracking-wide">
+                  Supply Chain Management
+                </span>
+              </div>
+
+              <h1 className="text-3xl md:text-4xl font-black text-slate-900 leading-[1.1] mb-4 tracking-tight">
+                Hospital Supply Chain Failure <br className="hidden md:block" />
+                Analysis & Simulation
               </h1>
-              <p className="text-slate-600 mb-4 max-w-2xl">
-                A simulation-based solution to Problem 14 — Critical Item Stockouts, Expiry Waste & Government Budget Cycle Mismatch
+
+              <p className="text-lg text-slate-600 mb-8 max-w-2xl leading-relaxed">
+                A simulation-based solution to <span className="text-teal-600 font-semibold">Problem 14</span> —
+                Critical Item Stockouts, Expiry Waste & Government Budget Cycle Mismatch.
               </p>
-              <p className="text-sm text-slate-500">
-                Submitted to: Mr. Hassan Tariq | Department of Management Sciences
-              </p>
+
+              <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                  <Calculator className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-0.5">Submitted To</p>
+                  <p className="text-sm font-semibold text-slate-700">Mr. Hassan Tariq | School of Management Sciences, GIKI</p>
+                </div>
+              </div>
             </div>
-            
-            <div className="bg-white border border-teal-100 rounded-xl p-5 shadow-sm min-w-[280px]">
-              <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-4">
-                Developed By
-              </p>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-md">
-                  <span className="text-sm font-medium text-slate-700">Hassan Rais</span>
-                  <span className="text-sm font-mono text-slate-500">2022212</span>
+
+            {/* Right: The Team */}
+            <div className="lg:col-span-4 bg-slate-50 border-l border-teal-100 p-8 md:p-10 flex flex-col justify-between">
+              <div>
+                <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+                  <Users className="w-3 h-3" />
+                  Developed By
+                </h3>
+
+                <div className="space-y-6">
+                  {[
+                    { name: "Hassan Rais", id: "2022212" },
+                    { name: "Muhammad Adeel", id: "2022331" },
+                    { name: "Nauman Ali Murad", id: "2022479" },
+                  ].map((student) => (
+                    <div key={student.id} className="group">
+                      <p className="text-sm font-bold text-slate-800 group-hover:text-teal-600 transition-colors mb-1">
+                        {student.name}
+                      </p>
+                      <p className="text-xs font-mono text-slate-400 tracking-wider">
+                        Reg No: {student.id}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-md">
-                  <span className="text-sm font-medium text-slate-700">Muhammad Adeel</span>
-                  <span className="text-sm font-mono text-slate-500">2022331</span>
-                </div>
-                <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-md">
-                  <span className="text-sm font-medium text-slate-700">Nauman Ali Murad</span>
-                  <span className="text-sm font-mono text-slate-500">2022479</span>
-                </div>
+              </div>
+
+              <div className="mt-12 pt-6 border-t border-slate-200">
+                <p className="text-[10px] text-slate-400 leading-relaxed italic">
+                  Synthetic simulation calibrated to Problem 14 parameters. No real patient data used.
+                </p>
               </div>
             </div>
           </div>
@@ -245,13 +275,40 @@ export default function CrisisPage() {
                 <p className="text-sm text-slate-600 pt-0.5">Run the Scenario Lab to test fixes and see their financial impact in real time</p>
               </div>
             </div>
-            
+
             <div className="flex flex-wrap gap-2">
               <span className="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1 rounded">200 SKUs simulated</span>
               <span className="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1 rounded">3 fiscal years</span>
               <span className="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1 rounded">5 interventions testable</span>
               <span className="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1 rounded">Rs 1.39B annual waste</span>
             </div>
+          </div>
+        </div>
+
+        {/* ─── NEW SECTION: Financial Damage Summary ─── */}
+        <div className="bg-red-50/50 rounded-2xl p-8 border border-red-100 shadow-sm mb-12">
+          <h3 className="text-xl font-bold mb-6 text-[#0F172A]">Annual Financial Damage Summary</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-4 border border-[#E2E8F0]">
+              <p className="text-sm text-[#64748B]">Total Expiry Waste</p>
+              <p className="text-2xl font-mono font-bold text-red-500">Rs 648M</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 border border-[#E2E8F0]">
+              <p className="text-sm text-[#64748B]">Patient OOP Burden</p>
+              <p className="text-2xl font-mono font-bold text-amber-500">Rs 480M</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 border border-[#E2E8F0]">
+              <p className="text-sm text-[#64748B]">Delayed Surgery Cost</p>
+              <p className="text-2xl font-mono font-bold text-amber-500">Rs 180M</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 border border-[#E2E8F0]">
+              <p className="text-sm text-[#64748B]">Emergency Premium</p>
+              <p className="text-2xl font-mono font-bold text-amber-600">Rs 85M</p>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between md:items-center bg-white border border-red-200 rounded-xl p-4 gap-4">
+            <span className="text-lg text-[#0F172A] font-medium">Total Avoidable System Waste</span>
+            <span className="text-3xl font-mono font-bold text-red-600">Rs 1.393B / yr</span>
           </div>
         </div>
 
@@ -267,14 +324,13 @@ export default function CrisisPage() {
                 </span>
               </div>
               <p className="text-5xl lg:text-6xl font-black text-red-500 mb-2">
-                {formatPercent(avgStockoutRate, 0)}
+                18.4%
               </p>
               <p className="text-lg text-red-600 font-semibold mb-3">
                 Critical item stockout rate
               </p>
               <p className="text-sm text-red-600/80 leading-relaxed">
-                {sim.overallMetrics.totalPatientOOPEvents.toLocaleString()} patients/year sent to buy
-                medicines outside at 35–55% premium
+                480,000 patient prescriptions per year<br />forced to outside pharmacies at premium prices
               </p>
             </div>
 
@@ -288,22 +344,21 @@ export default function CrisisPage() {
             </div>
 
             {/* RIGHT — Expiry */}
-            <div className="rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none border-b border-t border-l md:border-l-0 border-r border-amber-200 bg-amber-50 p-8 lg:p-10 border-r-4 sm:border-r-amber-500 md:border-l-4 md:border-l-amber-500 md:border-r md:border-r-amber-200">
+            <div className="rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none border-b border-t border-l md:border-l-0 border-r border-red-200 bg-red-50 p-8 lg:p-10 border-r-4 sm:border-r-red-500 md:border-l-4 md:border-l-red-500 md:border-r md:border-r-red-200">
               <div className="flex items-center gap-2 mb-3">
-                <Clock className="w-5 h-5 text-amber-500" />
-                <span className="text-sm font-semibold text-amber-500 uppercase tracking-wider">
+                <Clock className="w-5 h-5 text-red-500" />
+                <span className="text-sm font-semibold text-red-500 uppercase tracking-wider">
                   Expiry Waste
                 </span>
               </div>
-              <p className="text-5xl lg:text-6xl font-black text-amber-500 mb-2">
-                {formatPercent(avgExpiryRate, 1)}
+              <p className="text-5xl lg:text-6xl font-black text-red-500 mb-2">
+                Rs 648M
               </p>
-              <p className="text-lg text-amber-600 font-semibold mb-3">
+              <p className="text-lg text-red-600 font-semibold mb-3">
                 Annual inventory expires unused
               </p>
-              <p className="text-sm text-amber-600/80 leading-relaxed">
-                {formatRs(sim.overallMetrics.totalExpiryWasteRs / 3)} worth of medicines
-                thrown away each year
+              <p className="text-sm text-red-600/80 leading-relaxed">
+                Procured medicines thrown away on shelves<br />while same items are out-of-stock
               </p>
             </div>
           </div>
@@ -319,7 +374,15 @@ export default function CrisisPage() {
           </div>
         </div>
 
-        {/* ─── EXISTING SECTION D: 3-Year Crisis Timeline ─── */}
+        <div className="bg-teal-50 border-l-4 border-teal-500 p-5 rounded-r-lg mb-8 flex items-start gap-4">
+          <div className="text-teal-500 text-xl font-bold mt-1">ℹ️</div>
+          <p className="text-[15px] text-teal-800 leading-relaxed font-medium">
+            <span className="font-bold uppercase tracking-wider block mb-1">Key Insight: The Paradox</span>
+            The massive spikes in <span className="font-bold text-red-600">Expiry Waste</span> (red line) consistently occur immediately before or as the <span className="font-bold text-red-400">Budget Blackout</span> (shaded area) hits. The hospital panic-buys massive amounts of excess stock before being legally blocked from purchasing, only for the old stock to expire on shelves while new stock deliveries freeze, simultaneously driving up <span className="font-bold text-[#0F172A]">Stockouts</span> (red bars).
+          </p>
+        </div>
+
+        {/* ─── SECTION C: 3-Year Crisis Timeline ─── */}
         <div className="mb-12">
           <Card className="bg-white border-[#E2E8F0]">
             <CardHeader>
@@ -332,7 +395,7 @@ export default function CrisisPage() {
               </p>
             </CardHeader>
             <CardContent>
-              <div className="h-[360px]">
+              <div className="h-[360px] min-h-[360px] min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart data={timelineData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" strokeOpacity={0.8} />
@@ -340,19 +403,13 @@ export default function CrisisPage() {
                     {/* Blackout reference areas */}
                     {blackoutAreas.map((area, i) => (
                       <ReferenceArea
-                         key={i}
-                         x1={area.x1}
-                         x2={area.x2}
-                         fill="#EF4444"
-                         fillOpacity={0.08}
-                         stroke="#EF4444"
-                         strokeOpacity={0.2}
-                         label={{
-                           value: area.label,
-                           position: "insideTop",
-                           fill: "#EF444480",
-                           fontSize: 10,
-                         }}
+                        key={i}
+                        x1={area.x1}
+                        x2={area.x2}
+                        fill="#EF4444"
+                        fillOpacity={0.12}
+                        stroke="#EF4444"
+                        strokeOpacity={0.15}
                       />
                     ))}
 
@@ -383,30 +440,30 @@ export default function CrisisPage() {
                       height={50}
                     />
                     <YAxis
-                       yAxisId="left"
-                       tick={{ fill: "#64748B", fontSize: 11 }}
-                       tickLine={{ stroke: "#E2E8F0" }}
-                       label={{
-                         value: "Stockout-days",
-                         angle: -90,
-                         position: "insideLeft",
-                         fill: "#64748B",
-                         fontSize: 11,
-                       }}
+                      yAxisId="left"
+                      tick={{ fill: "#64748B", fontSize: 11 }}
+                      tickLine={{ stroke: "#E2E8F0" }}
+                      label={{
+                        value: "Stockout-days",
+                        angle: -90,
+                        position: "insideLeft",
+                        fill: "#64748B",
+                        fontSize: 11,
+                      }}
                     />
                     <YAxis
-                       yAxisId="right"
-                       orientation="right"
-                       tick={{ fill: "#64748B", fontSize: 11 }}
-                       tickLine={{ stroke: "#E2E8F0" }}
-                       tickFormatter={(v: number) => formatRs(v)}
-                       label={{
-                         value: "Expiry Waste (Rs)",
-                         angle: 90,
-                         position: "insideRight",
-                         fill: "#64748B",
-                         fontSize: 11,
-                       }}
+                      yAxisId="right"
+                      orientation="right"
+                      tick={{ fill: "#64748B", fontSize: 11 }}
+                      tickLine={{ stroke: "#E2E8F0" }}
+                      tickFormatter={(v: number) => formatRs(v)}
+                      label={{
+                        value: "Expiry Waste (Rs)",
+                        angle: 90,
+                        position: "insideRight",
+                        fill: "#64748B",
+                        fontSize: 11,
+                      }}
                     />
 
                     <Tooltip content={<CrisisTimelineTooltip />} />
@@ -430,10 +487,10 @@ export default function CrisisPage() {
                       type="monotone"
                       dataKey="expiryWasteRs"
                       name="Expiry Waste Rs"
-                      stroke="#F59E0B"
-                      strokeWidth={2}
+                      stroke="#EF4444"
+                      strokeWidth={3}
                       dot={false}
-                      activeDot={{ r: 4, fill: "#F59E0B" }}
+                      activeDot={{ r: 4, fill: "#EF4444" }}
                     />
                   </ComposedChart>
                 </ResponsiveContainer>
@@ -455,7 +512,7 @@ export default function CrisisPage() {
               </p>
             </CardHeader>
             <CardContent>
-              <div className="h-[320px]">
+              <div className="h-[320px] min-h-[320px] min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={financialData} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" strokeOpacity={0.8} horizontal={false} />
@@ -465,10 +522,10 @@ export default function CrisisPage() {
                       tickFormatter={(v: number) => formatRs(v)}
                     />
                     <YAxis
-                       type="category"
-                       dataKey="year"
-                       tick={{ fill: "#0F172A", fontSize: 13, fontWeight: 600 }}
-                       width={60}
+                      type="category"
+                      dataKey="year"
+                      tick={{ fill: "#0F172A", fontSize: 13, fontWeight: 600 }}
+                      width={60}
                     />
                     <Tooltip content={<FinancialTooltip />} />
                     <Legend
@@ -498,11 +555,11 @@ export default function CrisisPage() {
             icon={Banknote}
           />
           <StatCard
-             title="Annual Expiry Waste"
-             value={formatRs(sim.overallMetrics.totalExpiryWasteRs / 3)}
-             subtitle={`${formatPercent(avgExpiryRate, 1)} of procurement budget`}
-             variant="danger"
-             icon={AlertTriangle}
+            title="Annual Expiry Waste"
+            value={formatRs(sim.overallMetrics.totalExpiryWasteRs / 3)}
+            subtitle={`${formatPercent(avgExpiryRate, 1)} of procurement budget`}
+            variant="danger"
+            icon={AlertTriangle}
           />
           <StatCard
             title="Patient OOP Burden"
@@ -512,11 +569,11 @@ export default function CrisisPage() {
             icon={Skull}
           />
           <StatCard
-             title="Forecast Error (MAPE)"
-             value={formatPercent(sim.overallMetrics.avgMAPE, 0)}
-             subtitle="Average pharmacist forecast error"
-             variant="warning"
-             icon={Calculator}
+            title="Forecast Error (MAPE)"
+            value={formatPercent(sim.overallMetrics.avgMAPE, 0)}
+            subtitle="Average pharmacist forecast error"
+            variant="warning"
+            icon={Calculator}
           />
         </div>
 
@@ -533,34 +590,30 @@ export default function CrisisPage() {
               return (
                 <Link key={card.title} href={card.href}>
                   <div
-                    className={`group relative rounded-xl border p-5 transition-all duration-300 hover:scale-[1.03] shadow-sm hover:shadow-md cursor-pointer h-full ${
-                      card.isPrimary
-                        ? "border-red-200 bg-red-50 glow-danger"
-                        : "border-[#E2E8F0] bg-white hover:border-accent/30"
-                    }`}
+                    className={`group relative rounded-xl border p-5 transition-all duration-300 hover:scale-[1.03] shadow-sm hover:shadow-md cursor-pointer h-full ${card.isPrimary
+                      ? "border-red-200 bg-red-50 glow-danger"
+                      : "border-[#E2E8F0] bg-white hover:border-accent/30"
+                      }`}
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <div
-                        className={`p-2 rounded-lg ${
-                          card.isPrimary
-                            ? "bg-red-100"
-                            : "bg-accent/10 group-hover:bg-accent/20"
-                        }`}
+                        className={`p-2 rounded-lg ${card.isPrimary
+                          ? "bg-red-100"
+                          : "bg-accent/10 group-hover:bg-accent/20"
+                          }`}
                       >
                         <Icon
-                          className={`w-4 h-4 ${
-                            card.isPrimary ? "text-red-500" : "text-accent"
-                          }`}
+                          className={`w-4 h-4 ${card.isPrimary ? "text-red-500" : "text-accent"
+                            }`}
                         />
                       </div>
                       <span
-                         className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                           card.severity === "Critical"
-                             ? "bg-red-100 text-red-600"
-                             : card.severity === "High"
-                             ? "bg-amber-100 text-amber-600"
-                             : "bg-blue-100 text-blue-600"
-                         }`}
+                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${card.severity === "Critical"
+                          ? "bg-red-100 text-red-600"
+                          : card.severity === "High"
+                            ? "bg-amber-100 text-amber-600"
+                            : "bg-blue-100 text-blue-600"
+                          }`}
                       >
                         {card.severity}
                       </span>
@@ -592,26 +645,34 @@ export default function CrisisPage() {
         {/* ─── Call to Action ─── */}
         <div className="text-center py-8 mb-4">
           <div className="inline-flex flex-col items-center">
-             <p className="text-[#64748B] mb-4 text-lg">
-               Ready to explore the interventions that can fix this?
-             </p>
-             <div className="flex gap-4">
-               <Link
-                 href="/budget-cycle"
-                 className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:border-accent/30 shadow-sm transition-all"
-               >
-                 <ShieldAlert className="w-4 h-4" />
-                 Understand the Root Causes
-               </Link>
-               <Link
-                 href="/scenario-lab"
-                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl text-sm font-medium hover:bg-accent-600 shadow-md shadow-accent/25 transition-all"
-               >
-                 Run Interventions
-                 <ArrowRight className="w-4 h-4" />
-               </Link>
-             </div>
+            <p className="text-[#64748B] mb-4 text-lg">
+              Ready to explore the interventions that can fix this?
+            </p>
+            <div className="flex gap-4">
+              <Link
+                href="/budget-cycle"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:border-accent/30 shadow-sm transition-all"
+              >
+                <ShieldAlert className="w-4 h-4" />
+                Understand the Root Causes
+              </Link>
+              <Link
+                href="/scenario-lab"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl text-sm font-medium hover:bg-accent-600 shadow-md shadow-accent/25 transition-all"
+              >
+                Run Interventions
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
+        </div>
+
+        {/* ─── NEW SECTION E: Next Step Navigation ─── */}
+        <div className="mt-16 mb-8 flex justify-center">
+          <Link href="/budget-cycle" className="inline-flex items-center gap-3 px-12 py-6 bg-teal-600 text-white rounded-2xl text-xl font-bold hover:bg-teal-700 shadow-xl hover:shadow-teal-600/40 transition-all hover:scale-[1.05] active:scale-[0.95]">
+            Next Step: See the Budget Blackout
+            <ArrowRight className="w-8 h-8" />
+          </Link>
         </div>
       </div>
     </div>

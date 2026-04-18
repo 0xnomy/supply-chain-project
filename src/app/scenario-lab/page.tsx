@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState, useCallback } from "react";
+import Link from "next/link";
 import {
   ComposedChart, BarChart, Bar, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
@@ -8,7 +9,7 @@ import {
 import {
   Wrench, DollarSign,
   ArrowDownRight, RotateCcw, Zap, ShieldCheck,
-  Clock, Calculator, FileText, Package,
+  Clock, Calculator, FileText, Package, ArrowRight,
 } from "lucide-react";
 import { computeScenario, DEFAULT_SCENARIO } from "@/lib/simulation/scenarioEngine";
 import type { ScenarioConfig } from "@/lib/simulation/types";
@@ -145,6 +146,29 @@ export default function ScenarioLabPage() {
         subtitle="Toggle interventions and see real-time financial impact. This is the decision-making tool for hospital management."
         badge="Interactive Scenario Lab"
       />
+
+      <div className="bg-white border-2 border-teal-500 rounded-2xl p-6 mb-8 shadow-xl shadow-teal-500/10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-center md:text-left">
+          <p className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-1">Headline Result</p>
+          <h2 className="text-2xl md:text-3xl font-black text-[#0F172A] leading-tight">
+            {enabledCount > 0 ? (
+              <>
+                With <span className="text-teal-600">{enabledCount}</span> interventions, annual waste drops from 
+                <span className="text-red-500 line-through ml-2">Rs 1.39B</span> to 
+                <span className="text-teal-600 ml-2 font-mono">Rs {((scenario.projectedAnnual.expiryWasteRs + scenario.projectedAnnual.emergencyPremiumRs + scenario.projectedAnnual.patientOOPRs + scenario.projectedAnnual.delayedSurgeryRs) / 1000000000).toFixed(2)}B</span>
+              </>
+            ) : (
+              <>
+                Baseline annual waste stands at <span className="text-red-500 ml-2">Rs 1.39B</span>. Toggle interventions below.
+              </>
+            )}
+          </h2>
+        </div>
+        <div className="bg-teal-600 text-white px-6 py-4 rounded-xl text-center min-w-[180px]">
+          <p className="text-xs font-bold uppercase opacity-80 mb-1">Total Saving</p>
+          <p className="text-2xl font-mono font-black">{formatRs(scenario.projectedAnnual.totalSavingsRs)}</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* ─── LEFT: Control Panel ─── */}
@@ -337,7 +361,7 @@ export default function ScenarioLabPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px]">
+              <div className="h-[300px] min-h-[300px] min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart data={comparisonData} margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F099" />
@@ -377,7 +401,7 @@ export default function ScenarioLabPage() {
               </p>
             </CardHeader>
             <CardContent>
-              <div className="h-[280px]">
+              <div className="h-[280px] min-h-[280px] min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={waterfallData} margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F099" />
@@ -486,7 +510,7 @@ export default function ScenarioLabPage() {
               <CardTitle className="text-base">5-Year ROI Projection</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-[250px]">
+              <div className="h-[250px] min-h-[250px] min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={roiData} margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F099" />
@@ -503,6 +527,13 @@ export default function ScenarioLabPage() {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      <div className="mt-16 mb-8 flex justify-center">
+        <Link href="/decision-tools" className="inline-flex items-center gap-3 px-12 py-6 bg-teal-600 text-white rounded-2xl text-xl font-bold hover:bg-teal-700 shadow-xl hover:shadow-teal-600/40 transition-all hover:scale-[1.05] active:scale-[0.95]">
+          Next Step: See the Decision Tools 
+          <ArrowRight className="w-8 h-8" />
+        </Link>
       </div>
     </div>
   );
